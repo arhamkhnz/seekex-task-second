@@ -52,7 +52,6 @@ export default function AddUser({ onAddUser }) {
   };
 
   const createUser = async (values) => {
-    console.log(values)
     try {
       const response = await axios.post(
         "https://dummyjson.com/users/add",
@@ -60,7 +59,7 @@ export default function AddUser({ onAddUser }) {
       );
       onAddUser(response);
       setVisible(false);
-      message.success("User added successfully");
+      message.success("User Added successfully");
     } catch (error) {
       message.error("An Error Occured Please Try Again");
     }
