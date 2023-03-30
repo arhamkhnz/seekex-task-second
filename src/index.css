@@ -103,6 +103,11 @@ code {
   }
 }
 
+.modal-other-detail-edit {
+  display: flex;
+  flex-direction: column;
+}
+
 .modal-email {
   margin-bottom: 0.5rem;
 }
