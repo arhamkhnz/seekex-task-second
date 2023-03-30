@@ -14,7 +14,7 @@ export default function Home() {
     };
     fetchPersons();
   }, []);
-  
+
   return (
     <>
       <TopNavigation />

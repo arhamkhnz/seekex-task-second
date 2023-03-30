@@ -9,7 +9,6 @@ export default function CardListComponent({ person }) {
   const [selectedPerson, setSelectedPerson] = useState(null);
 
   const handleCardClick = (person) => {
-    setSelectedPerson(person);
     setVisible(true);
   };
 
@@ -51,17 +50,43 @@ export default function CardListComponent({ person }) {
           </Row>
         </Card>
       </Col>
-      {/* <Modal
-        visible={visible}
-        title={person.name}
-        onCancel={handleModalClose}
-        footer={null}
-      >
-        <img src={person.avatar} alt={person.name} className="modal-avatar" />
-        <p>Email: {person.email}</p>
-        <p>Date of Birth: {person.dob}</p>
-        <p>Country: {person.country}</p>
-      </Modal> */}
+      <Modal open={visible} onCancel={handleModalClose} footer={null}>
+        <div className="modal-content">
+          <div className="modal-avatar-wrapper">
+            <img
+              src={person.image}
+              alt={person.name}
+              className="modal-avatar"
+            />
+            <div className="modal-name">
+              {person.firstName} {person.lastName}
+            </div>
+          </div>
+          <div className="modal-details">
+            <div className="modal-email">{person.email}</div>
+            <div className="modal-other-details">
+              <div className="modal-other-detail">
+                <div className="modal-other-detail-label">Gender:</div>
+                <div className="modal-other-detail-value">{person.gender}</div>
+              </div>
+              <div className="modal-other-detail">
+                <div className="modal-other-detail-label">Phone:</div>
+                <div className="modal-other-detail-value">{person.phone}</div>
+              </div>
+              <div className="modal-other-detail">
+                <div className="modal-other-detail-label">Age:</div>
+                <div className="modal-other-detail-value">{person.age}</div>
+              </div>
+              <div className="modal-other-detail">
+                <div className="modal-other-detail-label">Blood Group:</div>
+                <div className="modal-other-detail-value">
+                  {person.bloodGroup}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 }
