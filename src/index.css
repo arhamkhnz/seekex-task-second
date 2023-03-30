@@ -172,3 +172,14 @@ code {
   text-align: center;
   }
   }
+
+  .input-label {
+    width: 120px;
+    text-align: right;
+    margin-bottom: 8px;
+  }
+  
+  .input-field {
+    width: calc(100% - 120px);
+  }
+  
