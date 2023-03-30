@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Modal, Form, Input, Button, message, Select } from "antd";
+import { Modal, Form, Input, Button, message, Select, Spin } from "antd";
 import validator from "validator";
 import axios from "axios";
 
 export default function AddUser({ onAddUser }) {
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [selectValues, setSelectValues] = useState({
     gender: "Male",
     bloodGroup: "A+",
@@ -18,6 +19,7 @@ export default function AddUser({ onAddUser }) {
   };
 
   const handleAddUser = (values) => {
+    setLoading(true)
     let { firstName, lastName, email, phone, age } = values;
     values.gender = selectValues.gender;
     values.bloodGroup = selectValues.bloodGroup;
@@ -31,21 +33,31 @@ export default function AddUser({ onAddUser }) {
       !age
     ) {
       message.error("Please fill in all fields");
+      setLoading(false)
       return;
     }
 
     if (!validator.isEmail(email)) {
       message.error("Please enter a valid email address");
+      setLoading(false)
       return;
     }
 
     if (!validator.isNumeric(phone)) {
       message.error("Please enter a valid phone number");
+      setLoading(false)
+      return;
+    }
+
+    if (!validator.isLength(phone, { min: 10, max: 10 })) {
+      message.error("Phone number must be 10 digits long");
+      setLoading(false)
       return;
     }
 
     if (!validator.isNumeric(age)) {
       message.error("Please enter a valid age");
+      setLoading(false)
       return;
     }
     createUser(values);
@@ -60,8 +72,10 @@ export default function AddUser({ onAddUser }) {
       onAddUser(response);
       setVisible(false);
       message.success("User Added successfully");
+      setLoading(false)
     } catch (error) {
       message.error("An Error Occured Please Try Again");
+      setLoading(false)
     }
   };
 
@@ -77,6 +91,7 @@ export default function AddUser({ onAddUser }) {
         onCancel={() => setVisible(false)}
         footer={null}
       >
+        <Spin spinning={loading}>
         <Form layout="vertical" onFinish={handleAddUser}>
           <Form.Item
             label="First Name"
@@ -164,6 +179,7 @@ export default function AddUser({ onAddUser }) {
             </Button>
           </Form.Item>
         </Form>
+        </Spin>
       </Modal>
     </>
   );
