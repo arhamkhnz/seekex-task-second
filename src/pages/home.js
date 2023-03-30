@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TopNavigation from "../components/TopNavigation";
 import CardListComponent from "../components/CardListComponent";
 import AddUser from "../components/AddUser";
+import InfoModal from "../components/InfoModal";
 import { Row } from "antd";
 
 export default function Home() {
@@ -39,6 +40,7 @@ export default function Home() {
   return (
     <>
       <TopNavigation />
+      <InfoModal />
       <div style={{ marginTop: "0.5rem", padding: "0 50px" }}>
         <AddUser onAddUser={handleAddUser} />
         <Row style={{ marginTop: "0.5rem" }} gutter={[16, 16]}>
